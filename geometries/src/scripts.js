@@ -16,11 +16,10 @@ controls.update()
 
 const geometry = new three.BufferGeometry()
 
-const pointsArray = new Float32Array([
-    0, 0, 0,
-    0, 1, 0,
-    1, 0, 1
-])
+const npoints = 100
+const pointsArray = new Float32Array(npoints*3*3)
+
+for(let i=0; i<npoints*3*3; i++) pointsArray[i] = 2*(Math.random()-0.5)
 
 const pointAttribute = new three.BufferAttribute(pointsArray, 3)
 
