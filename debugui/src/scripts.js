@@ -21,6 +21,27 @@ const gui = new lil.GUI()
 const box = new three.Mesh(new three.BoxGeometry(1, 1, 1), new three.MeshBasicMaterial({color: '#ff0000'}))
 scene.add(box)
 
+gui
+    .add(box.position, 'x')
+    .min(-3)
+    .max(3)
+    .step(0.01)
+    .name('Horizontally')
+// gui.add(box.position, 'y', -3, 3, 0.01)
+// gui.add(box.position, 'z', -3, 3, 0.01)
+
+gui
+    .add(box, 'visible')
+    .name('Visible')
+
+gui
+    .add(box.material, 'wireframe')
+    .name('Wireframe mode')
+
+gui
+    .addColor(box.material, 'color')
+    .name('Box color')
+
 const animate = () => {
     renderer.render(scene, camera)
     window.requestAnimationFrame(animate)
