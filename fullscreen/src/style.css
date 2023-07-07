@@ -15,7 +15,8 @@
   right: 15px;
   top: 20px; 
   background-color: transparent;
-  padding: 2px;
+  width: 35px;
+  height: 35px;
   border: none;
   cursor: pointer;
 }
