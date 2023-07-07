@@ -9,3 +9,21 @@
   left: 0;
   outline: none;
 }
+
+.resize{
+  position: absolute;
+  right: 15px;
+  top: 20px; 
+  background-color: transparent;
+  padding: 2px;
+  border: none;
+  cursor: pointer;
+}
+
+.resize:active>i{
+  transform: scale(0.9)
+}
+
+.resize > i{
+  color: white;
+}

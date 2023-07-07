@@ -28,4 +28,17 @@ window.addEventListener('resize', () => {
     camera.updateProjectionMatrix()
 })
 
+let resizeButton = document.querySelector('.resize>i') 
+
+resizeButton.addEventListener('click', ()=>{
+    if(!document.fullscreenElement){
+        document.body.requestFullscreen()
+        resizeButton.classList.replace('fa-expand', 'fa-compress')
+    }
+    else{
+        document.exitFullscreen()
+        resizeButton.classList.replace('fa-compress', 'fa-expand')
+    }
+})
+
 animate()
