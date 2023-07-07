@@ -42,6 +42,20 @@ gui
     .addColor(box.material, 'color')
     .name('Box color')
 
+const boxParameters = {
+    spin: () => {
+        gsap.to(box.rotation, {
+            duration: 1.5,
+            y: box.rotation.y + 2*Math.PI
+        })
+    }
+}
+
+gui
+    .add(boxParameters, 'spin')
+    .name('Spin Box')
+    
+
 const animate = () => {
     renderer.render(scene, camera)
     window.requestAnimationFrame(animate)
