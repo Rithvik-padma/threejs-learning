@@ -1,6 +1,6 @@
 import * as three from 'three'
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js'
-
+import * as lil from 'lil-gui'
 
 const scene = new three.Scene(window.innerWidth, window.innerHeight)
 const camera = new three.PerspectiveCamera(75, window.innerWidth/window.innerHeight)
@@ -23,6 +23,8 @@ pointLight.position.set(0, 0, 5)
 
 const ambientLight = new three.AmbientLight(0xffffff, 0.6)
 scene.add(ambientLight)
+
+const gui = new lil.GUI()
 
 const tloader = new three.TextureLoader()
 const door = tloader.load('textures/door/color.jpg')
@@ -50,6 +52,10 @@ material.displacementMap = heightMapping
 material.displacementScale = 0.05
 material.aoMap = ambientOcclusion
 material.aoMapIntensity = 0.5
+
+gui.add(material, 'roughness').min(0).max(1).step(0.01).name('Roughness')
+gui.add(material, 'metalness').min(0).max(1).step(0.01).name('Metalness')
+gui.add(material, 'aoMapIntensity').min(0).max(10).step(0.01).name('AO Intensity')
 
 const plane = new three.Mesh(new three.PlaneGeometry(1, 1, 100, 100), material)
 scene.add(plane)
