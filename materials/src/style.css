@@ -1,0 +1,30 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.webgl{
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+}
+
+.resize{
+  position: absolute;
+  right: 15px;
+  top: 25px; 
+  background-color: transparent;
+  width: 35px;
+  height: 35px;
+  border: none;
+  cursor: pointer;
+}
+
+.resize:active>i{
+  transform: scale(0.9)
+}
+
+.resize > i{
+  color: white;
+}
