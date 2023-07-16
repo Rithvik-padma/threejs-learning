@@ -42,7 +42,23 @@ fontLoader.load('/Inconsolata.json', (font) => {
     const text = new three.Mesh(textGeometry, new three.MeshMatcapMaterial({matcap: texture}))
     scene.add(text)
     textGeometry.center()
-})
+}) 
+
+const cubeGeometry = new three.BoxGeometry(0.4, 0.4, 0.4)
+const donutGeometry = new three.TorusGeometry(0.3, 0.15)
+
+for(let i = 0; i < 200; i++){
+    const cube = new three.Mesh(cubeGeometry, new three.MeshMatcapMaterial({matcap: texture}))
+    const donut = new three.Mesh(donutGeometry, new three.MeshMatcapMaterial({matcap: texture}))
+    cube.position.set(15*(Math.random()-0.5), 15*(Math.random()-0.5), 15*(Math.random()-0.5))
+    donut.position.set(15*(Math.random()-0.5), 15*(Math.random()-0.5), 15*(Math.random()-0.5))
+    cube.rotation.set(Math.random()*Math.PI, Math.random()*Math.PI, Math.random()*Math.PI)
+    donut.rotation.set(Math.random()*Math.PI, Math.random()*Math.PI, Math.random()*Math.PI)
+    const scaleValue = Math.random()
+    cube.scale.set(scaleValue, scaleValue, scaleValue)
+    donut.scale.set(scaleValue, scaleValue, scaleValue)
+    scene.add(cube, donut)
+}
 
 
 window.addEventListener('resize', () => {
