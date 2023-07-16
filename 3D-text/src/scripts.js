@@ -12,8 +12,7 @@ const renderer = new three.WebGLRenderer({canvas: document.querySelector('canvas
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-camera.position.z = 5.5
-
+camera.position.z = 6
 
 const controls = new OrbitControls(camera, renderer.domElement)
 controls.enableDamping = true
@@ -25,6 +24,9 @@ const texture = textureLoader.load(matcap)
 three.ColorManagement.enabled = false
 renderer.outputColorSpace = three.LinearSRGBColorSpace
 texture.colorSpace = three.SRGBColorSpace
+
+const group = new three.Group()
+scene.add(group)
 
 const fontLoader = new FontLoader()
 fontLoader.load('/Inconsolata.json', (font) => {
@@ -40,7 +42,7 @@ fontLoader.load('/Inconsolata.json', (font) => {
         bevelSegments: 5,
     }) 
     const text = new three.Mesh(textGeometry, new three.MeshMatcapMaterial({matcap: texture}))
-    scene.add(text)
+    group.add(text)
     textGeometry.center()
 }) 
 
@@ -57,9 +59,8 @@ for(let i = 0; i < 200; i++){
     const scaleValue = Math.random()
     cube.scale.set(scaleValue, scaleValue, scaleValue)
     donut.scale.set(scaleValue, scaleValue, scaleValue)
-    scene.add(cube, donut)
+    group.add(cube, donut)
 }
-
 
 window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight)
@@ -81,7 +82,13 @@ resizeButton.addEventListener('click', ()=>{
     }
 })
 
+const Clock = new three.Clock()
+
 const animate = () => {
+    const time = Clock.getElapsedTime()
+    group.position.x = 3*Math.sin(Math.PI*time*0.5)
+    group.position.y = 3*Math.cos(Math.PI*time*0.5)
+    camera.lookAt(group.position)
     renderer.render(scene, camera)
     window.requestAnimationFrame(animate)
 }
