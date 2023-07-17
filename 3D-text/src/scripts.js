@@ -1,9 +1,11 @@
 import * as three from 'three'
+import * as lil from 'lil-gui' 
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js'
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry.js'
 import {FontLoader} from 'three/examples/jsm/loaders/FontLoader.js'
 import matcap from '/matcap.png'
 
+const gui = new lil.GUI()
 
 const scene = new three.Scene(window.innerWidth, window.innerHeight)
 const camera = new three.PerspectiveCamera(75, window.innerWidth/window.innerHeight)
@@ -84,10 +86,22 @@ resizeButton.addEventListener('click', ()=>{
 
 const Clock = new three.Clock()
 
+const rotation = {
+    rotate: true
+}
+
+gui.add(rotation, 'rotate').name('Rotation')
+
 const animate = () => {
     const time = Clock.getElapsedTime()
-    group.position.x = 3*Math.sin(Math.PI*time*0.5)
-    group.position.y = 3*Math.cos(Math.PI*time*0.5)
+    if(!rotation.rotate){
+        group.position.x = 0
+        group.position.y = 0
+    }
+    else{
+        group.position.x = 2.5*Math.sin(Math.PI*time*0.5)
+        group.position.y = 2.5*Math.cos(Math.PI*time*0.5)
+    }
     camera.lookAt(group.position)
     renderer.render(scene, camera)
     window.requestAnimationFrame(animate)
