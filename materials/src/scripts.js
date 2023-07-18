@@ -9,7 +9,6 @@ const renderer = new three.WebGLRenderer({canvas: document.querySelector('canvas
 renderer.setSize(window.innerWidth, window.innerHeight)
 
 camera.position.z = 2
-
 const controls = new OrbitControls(camera, renderer.domElement)
 controls.update()
 
